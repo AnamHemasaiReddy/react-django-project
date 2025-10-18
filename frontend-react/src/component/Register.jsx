@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const [username,setUsername]=useState('')
   const [email,setEmail]=useState('')
@@ -10,6 +10,7 @@ const Register = () => {
   const [error,setError]=useState({})
   const [success,setSuccess]=useState(false)
   const [loading,setLoading]=useState(false)
+  const navigate=useNavigate()
   const clickRegister= async(e)=>{
     e.preventDefault();
     setLoading(true);
@@ -21,6 +22,7 @@ const Register = () => {
       console.log("response.data==>",response.data)
       console.log('registration')
       setSuccess(true)
+      navigate('/login/')
     }catch(error){
       setError(error.response.data)
       console.error('register error',error.response.data)
